@@ -6,6 +6,7 @@ import {FavoriteNumber} from '../favorite-number'
 test('entering an invalid value shows an error message', () => {
   render(<FavoriteNumber />)
   const input = screen.getByLabelText(/favorite number/i)
+  // says this input should have a value of 10
   userEvent.type(input, '10')
   expect(screen.getByRole('alert')).toHaveTextContent(/the number is invalid/i)
 })

@@ -5,6 +5,7 @@ import {ErrorBoundary} from '../error-boundary'
 
 jest.mock('../api')
 
+// this will ensure all the have been cleared after every test
 afterEach(() => {
   jest.clearAllMocks()
 })
@@ -27,7 +28,7 @@ test('calls reportError and renders that there was a problem', () => {
 
   rerender(
     <ErrorBoundary>
-      <Bomb shouldThrow={true} />
+      <Bomb shouldThrow />
     </ErrorBoundary>,
   )
 

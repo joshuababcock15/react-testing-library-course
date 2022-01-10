@@ -60,10 +60,10 @@ test('calls reportError and renders that there was a problem', () => {
     </ErrorBoundary>,
   )
 
-  userEvent.click(screen.getByText(/try again/i))
+  userEvent.click(screen.getByText(/Try again?/))
 
   expect(mockReportError).not.toHaveBeenCalled()
   expect(console.error).not.toHaveBeenCalled()
   expect(screen.queryByRole('alert')).not.toBeInTheDocument()
-  expect(screen.queryByText(/try again/i)).not.toBeInTheDocument()
+  expect(screen.queryByText(/Try again?/)).not.toBeInTheDocument()
 })

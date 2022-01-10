@@ -44,5 +44,6 @@ test('calls reportError and renders that there was a problem', () => {
   expect(mockReportError).toHaveBeenCalledWith(error, info)
   expect(mockReportError).toHaveBeenCalledTimes(1)
 
+  // Once by js dom and once by react dom
   expect(console.error).toHaveBeenCalledTimes(2)
 })

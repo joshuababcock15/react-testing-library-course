@@ -13,7 +13,7 @@ function InaccessibleForm() {
 function AccessibleForm() {
   return (
     <form>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username">Userame</label>
       <input id="username" placeholder="username" />
     </form>
   )
@@ -21,6 +21,7 @@ function AccessibleForm() {
 
 test('inaccessible forms fail axe', async () => {
   const {container} = render(<InaccessibleForm />)
+  //   console.log(container.innerHTML)
   try {
     expect(await axe(container)).toHaveNoViolations()
   } catch (error) {
