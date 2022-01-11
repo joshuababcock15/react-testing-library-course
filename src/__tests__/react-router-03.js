@@ -4,6 +4,7 @@ import {render as rtlRender, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {Main} from '../main'
 
+// love this function!
 // normally you'd put this logic in your test utility file so it can be used
 // for all of your tests.
 function render(ui, {route = '/', ...renderOptions} = {}) {
