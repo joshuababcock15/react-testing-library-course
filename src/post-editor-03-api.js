@@ -1,8 +1,11 @@
 import * as React from 'react'
+import {Redirect} from 'react-router'
 import {savePost} from './api'
 
 function Editor({user}) {
   const [isSaving, setIsSaving] = React.useState(false)
+  const [redirect, setRedirect] = React.useState(false)
+  const [error, setError] = React.useState(null)
   function handleSubmit(e) {
     e.preventDefault()
     const {title, content, tags} = e.target.elements
@@ -10,11 +13,24 @@ function Editor({user}) {
       title: title.value,
       content: content.value,
       tags: tags.value.split(',').map((t) => t.trim()),
+      date: new Date().toISOString(),
       authorId: user.id,
     }
     setIsSaving(true)
-    savePost(newPost)
+    savePost(newPost).then(
+      () => setRedirect(true),
+      (response) => {
+        setIsSaving(false)
+        setError(response.data.error)
+      },
+    )
+    // redirect to the home page
   }
+
+  if (redirect) {
+    return <Redirect to="/" />
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="title-input">Title</label>
@@ -29,6 +45,7 @@ function Editor({user}) {
       <button type="submit" disabled={isSaving}>
         Submit
       </button>
+      {error ? <div role="alert">{error}</div> : null}
     </form>
   )
 }
