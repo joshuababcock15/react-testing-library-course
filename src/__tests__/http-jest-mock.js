@@ -12,10 +12,12 @@ test('loads greetings on click', async () => {
   render(<GreetingLoader />)
   const nameInput = screen.getByLabelText(/name/i)
   const loadButton = screen.getByText(/load/i)
-  userEvent.type(nameInput, 'Mary')
+  nameInput.value = 'Josh'
   userEvent.click(loadButton)
-  expect(mockLoadGreeting).toHaveBeenCalledWith('Mary')
-  expect(mockLoadGreeting).toHaveBeenCalledTimes(1)
+  // when you click the load button make this call to loadGreetting then goes to API to a server request
+  // so I will mock it
+  expect(mockLoadGreeting).toBeCalledWith('Josh')
+  expect(mockLoadGreeting).toBeCalledTimes(1)
   await waitFor(() =>
     expect(screen.getByLabelText(/greeting/i)).toHaveTextContent(testGreeting),
   )
